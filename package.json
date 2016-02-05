@@ -1,0 +1,48 @@
+{
+  "name": "coworkers-test",
+  "version": "1.0.0",
+  "description": "Coworkers queue testing made easy",
+  "main": "index.js",
+  "scripts": {
+    "test": "lab --verbose --assert code --threshold 100",
+    "test-watch": "nodemon -x npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tjmehta/coworkers-test"
+  },
+  "keywords": [
+    "coworkers",
+    "test",
+    "queue",
+    "message",
+    "handler",
+    "mock",
+    "fixture",
+    "unit"
+  ],
+  "author": "Tejesh Mehta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tjmehta/coworkers-test/issues"
+  },
+  "homepage": "https://github.com/tjmehta/coworkers-test",
+  "peerDependencies": {
+    "coworkers": "^0.3.0"
+  },
+  "devDependencies": {
+    "code": "^2.1.0",
+    "coworkers": "^0.3.0",
+    "lab": "^8.2.0",
+    "nodemon": "^1.8.1",
+    "standard": "^5.4.1"
+  },
+  "dependencies": {
+    "101": "^1.2.0",
+    "amqplib": "^0.4.0",
+    "assert-args": "^1.0.4",
+    "cast-buffer": "^1.1.0",
+    "sinon": "^1.17.3",
+    "throw-next-tick": "^0.1.0"
+  }
+}

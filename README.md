@@ -50,11 +50,10 @@ const app = module.exports = require('coworkers')()
 
 app.queue('int-queue', function () {
   const int = parseInt(this.message)
-  if (!isNaN(int)) {
-    this.ack = true
-  } else {
+  if (isNaN(int)) {
     throw new Error(`${this.message} is not a number`)
   }
+  this.ack = true
 })
 
 app.on('error', function (err) {

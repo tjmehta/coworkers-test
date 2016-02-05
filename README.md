@@ -63,7 +63,7 @@ app.on('error', function (err) {
 ```
 
 # API
-### .send(queueName, content, [props], [fields])
+### send(queueName, content, [props], [fields])
 Use this to mock-send a message to your coworkers app
 `content` is the message content (it will cast numbers, strings, objects, and arrays to buffers for you)
 `props` are optional, and set as message properties to add to your message.
@@ -84,27 +84,27 @@ Defaults:
 }
 ```
 
-### .send(...).expect(cb)
+### expect(cb)
 Allows you to handle any assertion errors (expectAck, etc) and make custom assertions of your own on context
 Callback recieves `err` (assertion err) and `context`. `context` will always be passed even in the case of an error.
 
-### .send(...).expectAck([expectedOpts])
+### expectAck([expectedOpts])
 Expect that queue's consumer `ack`s the message, will pass it's error to `expect` callback
 `opts` allows you to verify that `ack` was invoked w/ the appropriate opts
 
-### .send(...).expectNack([expectedOpts])
+### expectNack([expectedOpts])
 Expect that queue's consumer `nack`s the message, will pass it's error to `expect` callback
 `opts` allows you to verify that `nack` was invoked w/ the appropriate opts
 
-### .send(...).expectAckAll([expectedOpts])
+### expectAckAll([expectedOpts])
 Expect that queue's consuemr `ackAll`s the message, will pass it's error to `expect` callback
 `opts` allows you to verify that `ackAll` was invoked w/ the appropriate opts
 
-### .send(...).expectNackAll([expectedOpts])
+### expectNackAll([expectedOpts])
 Expect that queue's consumer `nackAll`s the message, will pass it's error to `expect` callback
 `opts` allows you to verify that `nackAll` was invoked w/ the appropriate opts
 
-### .send(...).expectReject([expectedOpts])
+### expectReject([expectedOpts])
 Expect that queue's consuemr `reject`s the message, will pass it's error to `expect` callback
 `opts` allows you to verify that `reject` was invoked w/ the appropriate opts
 

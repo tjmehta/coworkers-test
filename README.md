@@ -89,24 +89,24 @@ Allows you to handle any assertion errors (expectAck, etc) and make custom asser
 Callback recieves `err` (assertion err) and `context`. `context` will always be passed even in the case of an error.
 
 ### expectAck([expectedOpts])
-Expect that queue's consumer `ack`s the message, will pass it's error to `expect` callback
-`opts` allows you to verify that `ack` was invoked w/ the appropriate opts
+Expect that queue's consumer `ack`s the message, will pass it's error to `expect` callback.
+`expectedOpts` allows you to verify that `ack` was invoked w/ the appropriate expected opts
 
 ### expectNack([expectedOpts])
-Expect that queue's consumer `nack`s the message, will pass it's error to `expect` callback
-`opts` allows you to verify that `nack` was invoked w/ the appropriate opts
+Expect that queue's consumer `nack`s the message, will pass it's error to `expect` callback.
+`expectedOpts` allows you to verify that `nack` was invoked w/ the appropriate expected opts
 
 ### expectAckAll([expectedOpts])
-Expect that queue's consuemr `ackAll`s the message, will pass it's error to `expect` callback
-`opts` allows you to verify that `ackAll` was invoked w/ the appropriate opts
+Expect that queue's consuemr `ackAll`s the message, will pass it's error to `expect` callback.
+`expectedOpts` allows you to verify that `ackAll` was invoked w/ the appropriate expected opts
 
 ### expectNackAll([expectedOpts])
-Expect that queue's consumer `nackAll`s the message, will pass it's error to `expect` callback
-`opts` allows you to verify that `nackAll` was invoked w/ the appropriate opts
+Expect that queue's consumer `nackAll`s the message, will pass it's error to `expect` callback.
+`expectedOpts` allows you to verify that `nackAll` was invoked w/ the appropriate expected opts
 
 ### expectReject([expectedOpts])
-Expect that queue's consuemr `reject`s the message, will pass it's error to `expect` callback
-`opts` allows you to verify that `reject` was invoked w/ the appropriate opts
+Expect that queue's consuemr `reject`s the message, will pass it's error to `expect` callback.
+`expectedOpts` allows you to verify that `reject` was invoked w/ the appropriate expected opts
 
 # License
 MIT

@@ -1,7 +1,6 @@
 'use strict'
 
 const Code = require('code')
-const coworkers = require('coworkers')
 const Lab = require('lab')
 
 const mockChannelFactory = require('../lib/mock-channel-factory.js')
@@ -22,14 +21,14 @@ describe('mockChannel - publisher', function () {
 
   describe('tests for coverage', function () {
     it('should publisherChannel.ack', function (done) {
-      const message = { context:{} }
+      const message = { context: {} }
       ctx.mockChannel.ack(message)
       // assert that consumerChannel logic is not run
       expect(message.context.messageAcked).to.not.exist()
       done()
     })
     it('should publisherChannel.nack', function (done) {
-      const message = { context:{} }
+      const message = { context: {} }
       ctx.mockChannel.nack(message)
       // assert that consumerChannel logic is not run
       expect(message.context.messageAcked).to.not.exist()

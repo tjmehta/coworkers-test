@@ -59,7 +59,7 @@ app.queue('int-queue', function () {
 app.on('error', function (err, context) {
   console.error(err.stack)
   const requeue = false
-  context.nack(context.message, requeue)
+  context.consumerChannel.nack(context.message, requeue)
 })
 ```
 

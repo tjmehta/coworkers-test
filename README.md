@@ -56,9 +56,10 @@ app.queue('int-queue', function () {
   this.ack = true
 })
 
-app.on('error', function (err) {
+app.on('error', function (err, context) {
   console.error(err.stack)
-  this.nack = { requeue: false }
+  const requeue = false
+  context.nack(context.message, requeue)
 })
 ```
 

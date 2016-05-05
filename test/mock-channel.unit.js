@@ -11,15 +11,16 @@ const expect = Code.expect
 const it = lab.it
 const beforeEach = lab.beforeEach
 
-describe('mockChannel - publisher', function () {
+describe('mockChannel', function () {
   let ctx
-  beforeEach(function (done) {
-    ctx = {}
-    ctx.mockChannel = mockChannelFactory(false)
-    done()
-  })
 
-  describe('tests for coverage', function () {
+  describe('not consumer channel', function () {
+    beforeEach(function (done) {
+      ctx = {}
+      ctx.mockChannel = mockChannelFactory(false)
+      done()
+    })
+
     it('should publisherChannel.ack', function (done) {
       const message = { context: {} }
       ctx.mockChannel.ack(message)
@@ -32,6 +33,35 @@ describe('mockChannel - publisher', function () {
       ctx.mockChannel.nack(message)
       // assert that consumerChannel logic is not run
       expect(message.context.messageAcked).to.not.exist()
+      done()
+    })
+  })
+
+  describe('double call', function () {
+    beforeEach(function (done) {
+      ctx = {}
+      ctx.mockChannel = mockChannelFactory(true)
+      done()
+    })
+
+    it('should publisherChannel.ack', function (done) {
+      const message = { context: {} }
+      ctx.mockChannel.ack(message)
+      // assert that consumerChannel logic is run
+      expect(message.context.messageAcked).to.be.true()
+      expect(
+        ctx.mockChannel.ack.bind(ctx.mockChannel, message)
+      ).to.throw(/cannot/)
+      done()
+    })
+    it('should publisherChannel.nack', function (done) {
+      const message = { context: {} }
+      ctx.mockChannel.nack(message)
+      // assert that consumerChannel logic is run
+      expect(message.context.messageAcked).to.be.true()
+      expect(
+        ctx.mockChannel.nack.bind(ctx.mockChannel, message)
+      ).to.throw(/cannot/)
       done()
     })
   })

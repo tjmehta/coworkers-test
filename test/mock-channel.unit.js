@@ -25,14 +25,14 @@ describe('mockChannel', function () {
       const message = { context: {} }
       ctx.mockChannel.ack(message)
       // assert that consumerChannel logic is not run
-      expect(message.context.messageAcked).to.not.exist()
+      expect(message.messageAcked).to.not.exist()
       done()
     })
     it('should publisherChannel.nack', function (done) {
       const message = { context: {} }
       ctx.mockChannel.nack(message)
       // assert that consumerChannel logic is not run
-      expect(message.context.messageAcked).to.not.exist()
+      expect(message.messageAcked).to.not.exist()
       done()
     })
   })
@@ -48,7 +48,7 @@ describe('mockChannel', function () {
       const message = { context: {} }
       ctx.mockChannel.ack(message)
       // assert that consumerChannel logic is run
-      expect(message.context.messageAcked).to.be.true()
+      expect(message.messageAcked).to.be.true()
       expect(
         ctx.mockChannel.ack.bind(ctx.mockChannel, message)
       ).to.throw(/cannot/)
@@ -58,7 +58,7 @@ describe('mockChannel', function () {
       const message = { context: {} }
       ctx.mockChannel.nack(message)
       // assert that consumerChannel logic is run
-      expect(message.context.messageAcked).to.be.true()
+      expect(message.messageAcked).to.be.true()
       expect(
         ctx.mockChannel.nack.bind(ctx.mockChannel, message)
       ).to.throw(/cannot/)

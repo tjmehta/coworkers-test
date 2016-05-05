@@ -73,6 +73,13 @@ describe('coworkers-test functional test', function () {
           .expectAck()
           .expect(done)
       })
+      it('should assert ack with message - success', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('ack-queue', 'hello world')
+          .expectAck()
+          .expect(done)
+      })
       it('should assert ack - success w/ props and fields', function (done) {
         const app = createApp()
         coworkersTest(app)

@@ -1,6 +1,6 @@
 {
   "name": "coworkers-test",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Coworkers queue testing made easy",
   "main": "index.js",
   "scripts": {

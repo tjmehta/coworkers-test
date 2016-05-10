@@ -1,4 +1,5 @@
 'use strict'
+require('promise-polyfill')
 
 const Code = require('code')
 const coworkers = require('coworkers')
@@ -72,6 +73,32 @@ describe('coworkers-test functional test', function () {
           .send('ack-queue', {})
           .expectAck()
           .expect(done)
+      })
+      it('should assert ack - Promise no ack err', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('noop-queue', {})
+          .expectAck()
+          .expect()
+          .then(function () {
+            done(new Error('expected an error'))
+          })
+          .catch(function (err) {
+            expect(err).to.exist()
+            expect(err.message).to.equal('expected "ack" but got nothing')
+            done()
+          })
+      })
+      it('should assert ack - Promise success', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('ack-queue', {})
+          .expectAck()
+          .expect()
+          .then(function () {
+            done()
+          })
+          .catch(done)
       })
       it('should assert ack - success w/ props and fields', function (done) {
         const app = createApp()

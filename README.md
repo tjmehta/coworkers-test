@@ -22,11 +22,15 @@ describe('int-queue', function () {
       .expectAck() // check out the api section below for all available methods
       .expect(done)
   })
-  it('should nack if the message is not an int', function (done) {
+  it('should nack if the message is not an int, promise api', function (done) {
     coworkersTest(app)
       .send('foo-queue', 'abc')
       .expectNack() // check out the api section below for all available methods
-      .expect(done)
+      .expect()
+      .then(function () {
+        done()
+      })
+      .catch(done)
   })
   // failed test
   it('purposeful failed test to show coworker-test usage', function (done) {
@@ -85,9 +89,10 @@ Defaults:
 }
 ```
 
-### expect(cb)
+### expect([cb])
 Allows you to handle any assertion errors (expectAck, etc) and make custom assertions of your own on context
 Callback recieves `err` (assertion err) and `context`. `context` will always be passed even in the case of an error.
+If `expect` is not passed a callback it will return a `Promise`.
 
 ### expectAck([expectedOpts])
 Expect that queue's consumer `ack`s the message, will pass it's error to `expect` callback.

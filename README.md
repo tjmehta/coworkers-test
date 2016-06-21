@@ -10,6 +10,7 @@ npm install --save coworkers-test
 `test.js`:
 ```js
 const coworkersTest = require('coworkers-test')
+const sinon = require('sinon')
 
 const app = require('app.js')
 
@@ -41,6 +42,9 @@ describe('int-queue', function () {
         console.error(err) // [ Error: expected "ack" but got "nack" ]
         // you can make assertions on context if you want
         // it is always passed even in the error case.
+        // methods on the context are sinon stubs and can be asserted using sinon.
+        sinon.assert.calledOnce(context.publish)
+        sinon.assert.calledOnce(context.publisherChannel.publish)
         done(err)
       })
   })
@@ -92,7 +96,8 @@ Defaults:
 ### expect([cb])
 Allows you to handle any assertion errors (expectAck, etc) and make custom assertions of your own on context
 Callback recieves `err` (assertion err) and `context`. `context` will always be passed even in the case of an error.
-If `expect` is not passed a callback it will return a `Promise`.
+If `expect` is not passed a callback it will return a `Promise`. Context methods are [sinon](https://npmrepo.com/sinon)
+stubs and can be asserted using sinon's [assertion api](http://sinonjs.org/docs/#assertions-api).
 
 ### expectAck([expectedOpts])
 Expect that queue's consumer `ack`s the message, will pass it's error to `expect` callback.

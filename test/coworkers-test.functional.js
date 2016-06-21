@@ -2,7 +2,6 @@
 require('promise-polyfill')
 
 const Code = require('code')
-const coworkers = require('coworkers')
 const Lab = require('lab')
 
 const lab = module.exports.lab = Lab.script()
@@ -11,36 +10,7 @@ const expect = Code.expect
 const it = lab.it
 
 const coworkersTest = require('../index.js')
-const createApp = function () {
-  const app = coworkers()
-
-  app.use(function * (next) {
-    this.message.content = JSON.stringify(this.message.content)
-    yield next
-  })
-  app.queue('ack-queue', function * () {
-    this.ack = true
-  })
-  app.queue('nack-queue', function * () {
-    this.nack = true
-  })
-  app.queue('ack-all-queue', function * () {
-    this.ackAll = true
-  })
-  app.queue('nack-all-queue', function * () {
-    this.nackAll = true
-  })
-  app.queue('reject-queue', function * () {
-    this.reject = true
-  })
-  app.queue('noop-queue', function * () {})
-  app.queue('err-queue', function * () {
-    throw new Error('boom')
-  })
-  app.on('error', function () { })
-
-  return app
-}
+const createApp = require('./fixtures/create-coworkers-app.js')
 
 describe('coworkers-test functional test', function () {
   describe('assertions', function () {

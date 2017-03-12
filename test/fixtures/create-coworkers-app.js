@@ -35,6 +35,24 @@ function createCoworkersApp () {
     this.sendToQueue('queue-name', 'content', opts)
     this.ack = true
   })
+  app.queue('request-queue', function * () {
+    const opts = {}
+    this.request('queue-name', 'content', opts)
+    this.ack = true
+  })
+  app.queue('reply-queue', function * () {
+    const opts = {}
+    this.reply('content', opts)
+    this.ack = true
+  })
+  app.queue('check-queue', function * () {
+    this.checkQueue('queue-name')
+    this.ack = true
+  })
+  app.queue('check-reply-queue', function * () {
+    this.checkReplyQueue()
+    this.ack = true
+  })
   app.queue('noop-queue', function * () {})
   app.queue('err-queue', function * () {
     throw new Error('boom')

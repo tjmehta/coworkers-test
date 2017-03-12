@@ -191,6 +191,22 @@ describe('coworkers-test functional test', function () {
       })
     })
 
+    describe('stubContext', function () {
+      it('should allow stubbing context', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('reply-queue', {})
+          .stubContext(function (ctx) {
+            ctx.request.resolves({ foo: 1 })
+            done()
+          })
+          .expectReply('content', {})
+          .expect(function () {
+            // noop
+          })
+      })
+    })
+
     describe('expectCheckQueue', function () {
       it('should assert - success', function (done) {
         const app = createApp()

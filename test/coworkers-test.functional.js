@@ -119,6 +119,140 @@ describe('coworkers-test functional test', function () {
       })
     })
 
+    describe('expectRequest', function () {
+      it('should assert - success', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('request-queue', {})
+          .expectRequest('queue-name', 'content', {})
+          .expect(done)
+      })
+
+      it('should assert - error', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('request-queue', {})
+          .expectRequest('queue-name', 'ERRORCONTENT', {})
+          .expectRequest('queue-name', 'ERRORCONTENT', {})
+          .expect(function (err) {
+            expect(err).to.exist()
+            expect(err.message).to.match(/ERRORCONTENT/)
+            done()
+          })
+      })
+
+      it('should assert - error order', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('request-queue', {})
+          .expectRequest('queue-name', 'ERRORCONTENT', {})
+          .expectNack()
+          .expect(function (err) {
+            expect(err).to.exist()
+            expect(err.message).to.match(/ERRORCONTENT/)
+            done()
+          })
+      })
+
+      it('should assert - error order2', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('request-queue', {})
+          .expectNack()
+          .expectRequest('queue-name', 'ERRORCONTENT', {})
+          .expect(function (err) {
+            expect(err).to.exist()
+            expect(err.message).to.match(/expected "nack" but got "ack"/)
+            done()
+          })
+      })
+    })
+
+    describe('expectReply', function () {
+      it('should assert - success', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('reply-queue', {})
+          .expectReply('content', {})
+          .expect(done)
+      })
+
+      it('should assert - error', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('reply-queue', {})
+          .expectReply('ERRORCONTENT', {})
+          .expectReply('ERRORCONTENT', {})
+          .expect(function (err) {
+            expect(err).to.exist()
+            expect(err.message).to.match(/ERRORCONTENT/)
+            done()
+          })
+      })
+    })
+
+    describe('stubContext', function () {
+      it('should allow stubbing context', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('reply-queue', {})
+          .stubContext(function (ctx) {
+            ctx.request.resolves({ foo: 1 })
+            done()
+          })
+          .expectReply('content', {})
+          .expect(function () {
+            // noop
+          })
+      })
+    })
+
+    describe('expectCheckQueue', function () {
+      it('should assert - success', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('check-queue', {})
+          .expectCheckQueue('queue-name')
+          .expect(done)
+      })
+
+      it('should assert - error', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('check-queue', {})
+          .expectCheckQueue('ERRORQUEUE')
+          .expectCheckQueue('ERRORQUEUE')
+          .expect(function (err) {
+            expect(err).to.exist()
+            expect(err.message).to.match(/ERRORQUEUE/)
+            done()
+          })
+      })
+    })
+
+    describe('expectCheckReplyQueue', function () {
+      it('should assert - success', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('check-reply-queue', {})
+          .expectCheckReplyQueue()
+          .expect(done)
+      })
+
+      it('should assert - error', function (done) {
+        const app = createApp()
+        coworkersTest(app)
+          .send('check-reply-queue', {})
+          .expectCheckReplyQueue('ERRORQUEUE')
+          .expectCheckReplyQueue('ERRORQUEUE')
+          .expect(function (err) {
+            expect(err).to.exist()
+            expect(err.message).to.match(/ERRORQUEUE/)
+            done()
+          })
+      })
+    })
+
     describe('expect', function () {
       it('should assert - success', function (done) {
         const app = createApp()

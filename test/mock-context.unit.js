@@ -4,6 +4,7 @@ require('promise-polyfill')
 const Code = require('code')
 const Lab = require('lab')
 const sinon = require('sinon')
+require('sinon-as-promised')
 
 const createApp = require('./fixtures/create-coworkers-app.js')
 

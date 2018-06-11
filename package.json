@@ -44,7 +44,7 @@
     "amqplib": "^0.5.1",
     "assert-args": "^1.0.4",
     "cast-buffer": "^1.1.0",
-    "sinon": "^1.17.3",
+    "sinon": "^6.0.0",
     "sinon-as-promised": "^4.0.2",
     "throw-next-tick": "^0.1.0"
   }

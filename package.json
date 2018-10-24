@@ -34,7 +34,7 @@
   "devDependencies": {
     "code": "^4.0.0",
     "coworkers": "^0.x.x",
-    "lab": "^11.2.1",
+    "lab": "^17.0.1",
     "nodemon": "^1.8.1",
     "promise-polyfill": "^7.1.2",
     "standard": "^8.6.0"

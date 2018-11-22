@@ -32,7 +32,7 @@
     "coworkers": "^0.x.x"
   },
   "devDependencies": {
-    "code": "^4.0.0",
+    "code": "^5.2.4",
     "coworkers": "^0.x.x",
     "lab": "^11.2.1",
     "nodemon": "^1.8.1",

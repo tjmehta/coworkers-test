@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "101": "^1.2.0",
-    "amqplib": "^0.5.1",
+    "amqplib": "^0.5.4",
     "assert-args": "^1.0.4",
     "cast-buffer": "^1.1.0",
     "sinon": "^1.17.3",
